@@ -203,10 +203,33 @@ h1,h2,h3{text-wrap:balance}p,summary,.strategy-tabs strong,.message{text-wrap:pr
 @media(max-width:640px){.chat-dialog{width:calc(100% - 16px);height:min(700px,calc(100dvh - 16px));max-height:calc(100dvh - 16px);margin:auto 8px 8px;border-radius:12px}.chat-heading{padding:14px 16px}.chat-log{padding:16px}.chat-compose{padding:12px 14px;gap:8px}.chat-compose .button{padding-inline:12px}.chat-disclaimer{padding:8px 14px}.chat-error{padding-inline:14px}}
 
 /* Upcoming plans teaser. */
-.tariffs{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:32px;background:rgb(38 74 239 / 6%);border:1px solid rgb(38 74 239 / 9%);border-radius:20px;padding:52px clamp(24px,4vw,60px);margin-block:64px}
+.tariffs{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);align-items:center;gap:24px;background:rgb(38 74 239 / 6%);border:1px solid rgb(38 74 239 / 9%);border-radius:20px;padding:52px clamp(24px,4vw,60px) 0;margin-block:64px;overflow:hidden}
 .tariffs .section-heading{margin-bottom:28px}
 .tariffs .section-heading h2{font-size:clamp(36px,4vw,60px)}
 .tariffs .section-heading>p{max-width:460px;font-size:16px;padding:0}
-.tariffs-copy{min-width:0}
-.tariffs-art{display:block;width:100%;height:auto;overflow:visible}
-@media(max-width:640px){.tariffs{grid-template-columns:minmax(0,1fr);gap:12px;padding:30px 24px 12px;margin-block:40px;border-radius:16px}.tariffs .section-heading>p{font-size:15px;margin-top:20px}.tariffs-art{max-width:440px;margin-inline:auto}}
+.tariffs-copy{min-width:0;padding-bottom:52px;position:relative;z-index:2}
+.tariffs-stage{position:relative;align-self:end;height:410px;perspective:1000px;isolation:isolate}
+.tariffs-floor{position:absolute;left:5%;right:-10%;bottom:-40px;height:130px;background:radial-gradient(ellipse,#273b7745,transparent 65%);z-index:-1}
+.tariff-card-slot{position:absolute;width:43%;bottom:-65px;transition:transform 1s cubic-bezier(.2,.75,.2,1),opacity .7s;transform:translateY(0);opacity:1}
+.tariff-preview-card{height:340px;padding:22px 20px;border-radius:18px;border:1px solid #ffffffc9;background:linear-gradient(135deg,#fff 5%,#f0f3fc 70%,#dce4f6);color:#263342;box-shadow:0 18px 28px #172f6830,inset 1px 1px 0 #fff,inset -2px -1px 2px #a9b8d04d;transform:rotateY(-16deg) rotateZ(-12deg);transform-origin:50% 100%;display:flex;flex-direction:column;gap:20px}
+.tariff-base{left:0;z-index:1;bottom:-82px}
+.tariff-plus{left:28%;z-index:2;bottom:-38px;transition-delay:.14s}
+.tariff-plus .tariff-preview-card{height:370px;background:linear-gradient(140deg,#6383ff 0%,#3459ec 38%,#1935af 100%);color:white;border-color:#aabaff;box-shadow:0 22px 36px #16359b40,inset 1px 1px 1px #c4d0ff8c,inset -2px -2px 3px #0c247c70;transform:rotateY(-16deg) rotateZ(-4deg)}
+.tariff-premium{left:58%;z-index:3;bottom:-68px;transition-delay:.28s}
+.tariff-premium .tariff-preview-card{height:355px;background:linear-gradient(135deg,#384453,#1e2835 55%,#111a27);color:#e3efbc;border-color:#687581;box-shadow:0 22px 38px #15233950,inset 1px 1px 1px #a6b4c254,inset -2px -2px 3px #080e1970;transform:rotateY(-16deg) rotateZ(8deg)}
+.tariff-card-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.tariff-card-icon{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:#264aef0b;box-shadow:inset 0 1px 1px #ffffff70;border:1px solid #264aef12}
+.tariff-card-icon svg{width:23px;height:23px}
+.tariff-plus .tariff-card-icon,.tariff-premium .tariff-card-icon{background:#ffffff10;border-color:#ffffff20}
+.tariff-card-index{font-size:10px;letter-spacing:.1em;opacity:.6}
+.tariff-card-name{font-size:clamp(16px,1.7vw,23px);font-weight:500;letter-spacing:-.04em;white-space:nowrap}
+.tariff-price-blank{height:23px;width:68%;border-radius:6px;background:currentColor;opacity:.17}
+.tariff-card-lines{display:grid;gap:13px;padding-top:18px;border-top:1px solid #8393b233}
+.tariff-card-lines span{display:flex;align-items:center;gap:8px}
+.tariff-card-lines svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.5;opacity:.8;flex-shrink:0}
+.tariff-card-lines i{height:6px;background:currentColor;opacity:.2;border-radius:4px;width:80%}
+.tariff-card-lines span:nth-child(2n) i{width:60%}
+.tariff-card-button{margin-top:auto;min-height:28px;border-radius:7px;background:currentColor;opacity:.13}
+.tariffs-motion-ready:not(.tariffs-visible) .tariff-card-slot{transform:translateY(110%);opacity:0}
+@media(max-width:640px){.tariffs{grid-template-columns:minmax(0,1fr);gap:0;padding:30px 24px 0;margin-block:40px;border-radius:16px}.tariffs-copy{padding-bottom:12px}.tariffs .section-heading>p{font-size:15px;margin-top:20px}.tariffs-stage{height:310px;margin-inline:-12px}.tariff-card-slot{width:40%}.tariff-base{left:6%}.tariff-base .tariff-preview-card{transform:rotateY(-12deg) rotateZ(-6deg)}.tariff-plus{left:30%}.tariff-preview-card{height:270px;padding:16px 12px;gap:15px;border-radius:14px}.tariff-plus .tariff-preview-card{height:300px}.tariff-premium .tariff-preview-card{height:285px}.tariff-card-name{font-size:16px}.tariff-card-icon{width:32px;height:32px;border-radius:9px}.tariff-card-icon svg{width:20px;height:20px}.tariff-card-lines{gap:10px;padding-top:12px}.tariff-card-lines span{gap:5px}.tariff-price-blank{height:20px}.tariff-premium{left:57%}.tariff-card-top{gap:4px}}
+@media(prefers-reduced-motion:reduce){.tariff-card-slot{transition:none}}

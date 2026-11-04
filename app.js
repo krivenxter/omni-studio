@@ -137,3 +137,11 @@ const leadObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
 const heroLead=document.querySelector('.hero-lead');if(heroLead)leadObserver.observe(heroLead);
 
 motionPreference.addEventListener('change',()=>{document.documentElement.classList.toggle('motion-enabled',!motionPreference.matches);if(motionPreference.matches){leadTokens.forEach(token=>{clearTimeout(leadTimers.get(token));token.classList.remove('is-playing');});document.querySelectorAll('.reveal').forEach(el=>el.classList.add('is-visible'));}pageMotion();});
+
+// Reveal upcoming plans from behind the section edge.
+const tariffsSection=document.getElementById('tariffs');
+if(tariffsSection&&!motionPreference.matches){
+ tariffsSection.classList.add('tariffs-motion-ready');
+ const tariffsObserver=new IntersectionObserver(entries=>{if(entries.some(entry=>entry.isIntersecting)){tariffsSection.classList.add('tariffs-visible');tariffsObserver.disconnect();}},{threshold:.18});
+ tariffsObserver.observe(tariffsSection);
+}
