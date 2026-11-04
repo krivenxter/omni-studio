@@ -233,3 +233,10 @@ h1,h2,h3{text-wrap:balance}p,summary,.strategy-tabs strong,.message{text-wrap:pr
 .tariffs-motion-ready:not(.tariffs-visible) .tariff-card-slot{transform:translateY(110%);opacity:0}
 @media(max-width:640px){.tariffs{grid-template-columns:minmax(0,1fr);gap:0;padding:30px 24px 0;margin-block:40px;border-radius:16px}.tariffs-copy{padding-bottom:12px}.tariffs .section-heading>p{font-size:15px;margin-top:20px}.tariffs-stage{height:310px;margin-inline:-12px}.tariff-card-slot{width:40%}.tariff-base{left:6%}.tariff-base .tariff-preview-card{transform:rotateY(-12deg) rotateZ(-6deg)}.tariff-plus{left:30%}.tariff-preview-card{height:270px;padding:16px 12px;gap:15px;border-radius:14px}.tariff-plus .tariff-preview-card{height:300px}.tariff-premium .tariff-preview-card{height:285px}.tariff-card-name{font-size:16px}.tariff-card-icon{width:32px;height:32px;border-radius:9px}.tariff-card-icon svg{width:20px;height:20px}.tariff-card-lines{gap:10px;padding-top:12px}.tariff-card-lines span{gap:5px}.tariff-price-blank{height:20px}.tariff-premium{left:57%}.tariff-card-top{gap:4px}}
 @media(prefers-reduced-motion:reduce){.tariff-card-slot{transition:none}}
+
+.chat-heading{position:relative;isolation:isolate;overflow:hidden}
+.chat-heading:before{content:'';position:absolute;z-index:-1;inset:-180%;background:conic-gradient(from 30deg,transparent 10%,#264aef 28%,#6a96ff 34%,transparent 45%,transparent 70%,#2743a088 85%,transparent);filter:blur(22px);opacity:.65;animation:assistantGlow 12s linear infinite;pointer-events:none}
+.chat-heading>*{position:relative}
+.chat-dialog.is-closing::backdrop{animation:chatBackdropExit .2s ease-in forwards}
+@keyframes chatBackdropExit{to{background:transparent;backdrop-filter:blur(0)}}
+@media(prefers-reduced-motion:reduce){.chat-heading:before,.chat-dialog[open]{animation:none}}

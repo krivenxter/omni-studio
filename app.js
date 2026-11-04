@@ -29,9 +29,17 @@ navigation.querySelectorAll('a').forEach(link=>link.addEventListener('click',clo
 document.addEventListener('keydown',event=>{if(event.key==='Escape')closeMenu();});
 let previousFocus;
 function openDialog(dialog){previousFocus=document.activeElement;dialog.showModal();document.body.style.overflow='hidden';}
+function closeDialog(dialog){
+ if(dialog.id!=='chat-dialog'||matchMedia('(prefers-reduced-motion: reduce)').matches){dialog.close();return;}
+ if(dialog.classList.contains('is-closing'))return;
+ dialog.classList.add('is-closing');
+ const exit=dialog.animate([{opacity:1,transform:'translateY(0)'},{opacity:0,transform:'translateY(10px)'}],{duration:200,easing:'ease-in',fill:'forwards'});
+ exit.finished.then(()=>{dialog.close();dialog.classList.remove('is-closing');exit.cancel();});
+}
 document.querySelectorAll('dialog').forEach(dialog=>{
- dialog.querySelectorAll('[data-close-dialog]').forEach(button=>button.addEventListener('click',()=>dialog.close()));
- dialog.addEventListener('click',event=>{if(event.target===dialog){const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close();}});
+ dialog.querySelectorAll('[data-close-dialog]').forEach(button=>button.addEventListener('click',()=>closeDialog(dialog)));
+ dialog.addEventListener('click',event=>{if(event.target===dialog){const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)closeDialog(dialog);}});
+ dialog.addEventListener('cancel',event=>{if(dialog.id==='chat-dialog'){event.preventDefault();closeDialog(dialog);}});
  dialog.addEventListener('close',()=>{document.body.style.overflow='';previousFocus?.focus();});
 });
 document.querySelectorAll('[data-open-legal]').forEach(button=>button.addEventListener('click',()=>openDialog(document.getElementById('legal-dialog'))));
