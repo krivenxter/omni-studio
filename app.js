@@ -41,7 +41,7 @@ const botUrl=window.OMNI_BOT.chatUrl;
 const chatForm=document.getElementById('chat-form');
 let chatSession=crypto.randomUUID();
 try { chatSession=sessionStorage.getItem('omni-chat-session')||chatSession;sessionStorage.setItem('omni-chat-session',chatSession); } catch {}
-function addChatMessage(text,role){const element=document.createElement('div');element.className=`message ${role}`;element.textContent=text;document.getElementById('chat-log').append(element);element.scrollIntoView({block:'nearest'});}
+function addChatMessage(text,role){const element=document.createElement('div');element.className=`message ${role}`;element.textContent=text;document.getElementById('chat-log').append(element);const log=document.getElementById('chat-log');log.scrollTop=log.scrollHeight;}
 if(botUrl){
  document.getElementById('chat-status').textContent='Расскажите о вашей задаче';
  document.getElementById('chat-welcome').textContent='Здравствуйте! Расскажите о вашем бизнесе и задаче.';
