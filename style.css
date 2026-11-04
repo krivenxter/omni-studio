@@ -201,3 +201,12 @@ h1,h2,h3{text-wrap:balance}p,summary,.strategy-tabs strong,.message{text-wrap:pr
 .chat-disclaimer .text-link{font-size:11px;padding-bottom:3px}
 .chat-disclaimer p{margin-top:6px}
 @media(max-width:640px){.chat-dialog{width:calc(100% - 16px);height:min(700px,calc(100dvh - 16px));max-height:calc(100dvh - 16px);margin:auto 8px 8px;border-radius:12px}.chat-heading{padding:14px 16px}.chat-log{padding:16px}.chat-compose{padding:12px 14px;gap:8px}.chat-compose .button{padding-inline:12px}.chat-disclaimer{padding:8px 14px}.chat-error{padding-inline:14px}}
+
+/* Upcoming plans teaser. */
+.tariffs{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:32px;background:rgb(38 74 239 / 6%);border:1px solid rgb(38 74 239 / 9%);border-radius:20px;padding:52px clamp(24px,4vw,60px);margin-block:64px}
+.tariffs .section-heading{margin-bottom:28px}
+.tariffs .section-heading h2{font-size:clamp(36px,4vw,60px)}
+.tariffs .section-heading>p{max-width:460px;font-size:16px;padding:0}
+.tariffs-copy{min-width:0}
+.tariffs-art{display:block;width:100%;height:auto;overflow:visible}
+@media(max-width:640px){.tariffs{grid-template-columns:minmax(0,1fr);gap:12px;padding:30px 24px 12px;margin-block:40px;border-radius:16px}.tariffs .section-heading>p{font-size:15px;margin-top:20px}.tariffs-art{max-width:440px;margin-inline:auto}}
