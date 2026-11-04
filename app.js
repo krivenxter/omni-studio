@@ -34,7 +34,10 @@ function closeDialog(dialog){
  if(dialog.classList.contains('is-closing'))return;
  dialog.classList.add('is-closing');
  const exit=dialog.animate([{opacity:1,transform:'translateY(0)'},{opacity:0,transform:'translateY(10px)'}],{duration:200,easing:'ease-in',fill:'forwards'});
- exit.finished.then(()=>{dialog.close();dialog.classList.remove('is-closing');exit.cancel();});
+ let finished=false;
+ const finish=()=>{if(finished)return;finished=true;clearTimeout(fallback);dialog.close();dialog.classList.remove('is-closing');exit.cancel();};
+ const fallback=setTimeout(finish,240);
+ exit.finished.then(finish,()=>{});
 }
 document.querySelectorAll('dialog').forEach(dialog=>{
  dialog.querySelectorAll('[data-close-dialog]').forEach(button=>button.addEventListener('click',()=>closeDialog(dialog)));
