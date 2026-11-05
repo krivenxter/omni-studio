@@ -4,11 +4,11 @@ let started=false;
 async function startPlanet(){
  if(started)return;
  started=true;control.disabled=true;
- try{await import('./planet.js?v=58');host.classList.remove('planet-poster-only');}
+ try{await import('./planet.js?v=59');host.classList.remove('planet-poster-only');}
  catch{host.classList.add('planet-fallback');}
  finally{control.disabled=false;}
 }
-if(matchMedia('(max-width: 640px), (prefers-reduced-motion: reduce)').matches){
+if(matchMedia('(prefers-reduced-motion: reduce)').matches){
  host.classList.add('planet-poster-only');
  control.setAttribute('aria-label','Включить 3D-планету');
  control.setAttribute('aria-pressed','false');
