@@ -316,3 +316,8 @@ ul li::marker{color:var(--blue)}.direction-scale li::marker,.contact li::marker{
 @media(min-width:641px){.strategy-panel{min-height:var(--strategy-height,600px)}}
 
 .lead-network .branch-b{top:11px}.lead-network .branch-c{top:22px}.footer-bottom{justify-content:flex-start}
+
+.lead-client-check path{stroke-width:1.5;stroke:var(--blue);fill:none;stroke-linecap:round;stroke-linejoin:round}
+.strategy-panel .strategy-graphic{height:220px}
+.strategy-graphic svg.strategy-scene{overflow:visible}
+@media(max-width:640px){.strategy-panel .strategy-graphic{height:180px}}
