@@ -75,11 +75,13 @@ chatForm.addEventListener('submit',async event=>{
 
 // Motion follows the scroll; native content stays visible without JavaScript.
 const motionPreference=matchMedia('(prefers-reduced-motion: reduce)');
-const revealItems=[...document.querySelectorAll('.direction,.section-heading,.franchise-copy,.franchise-package,.contact-grid,.process-list li')];
+const revealItems=[...document.querySelectorAll('.hero-top,.hero-copy h1,.hero-lead,.hero-actions,.hero-bottom,.intro-grid,.direction,.section-heading,.individual-factor,.individual-result,.strategy-layout,.franchise-copy,.franchise-package,.ai-copy,.ai-console,.contact-grid,.footer-top,.footer-bottom')];
 if(!motionPreference.matches){
  document.documentElement.classList.add('motion-enabled');
- const revealObserver=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');revealObserver.unobserve(entry.target);}});},{threshold:.12});
+ document.querySelectorAll('.hero-copy h1,.hero-lead,.hero-actions').forEach((element,index)=>element.style.setProperty('--reveal-delay',`${index*70}ms`));
+ const revealObserver=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');revealObserver.unobserve(entry.target);}});},{threshold:0,rootMargin:'0px 0px -24px 0px'});
  revealItems.forEach(element=>{element.classList.add('reveal');revealObserver.observe(element);});
+ motionPreference.addEventListener('change',event=>{if(event.matches){revealItems.forEach(element=>element.classList.add('is-visible'));revealObserver.disconnect();}});
 }
 const processSteps=[...document.querySelectorAll('.process-list li')];
 let currentStage=-1;
