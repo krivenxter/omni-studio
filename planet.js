@@ -31,8 +31,8 @@ if(renderer){
  });
  loadingManager.onError=()=>{assetsFailed=true;host.classList.add('planet-fallback');host.classList.remove('planet-ready');};
  const textureLoader=new THREE.TextureLoader(loadingManager);
- const surface=textureLoader.load('./assets/lunar-surface-4k.jpg');surface.wrapS=THREE.RepeatWrapping;surface.anisotropy=renderer.capabilities.getMaxAnisotropy();
- const heightMap=textureLoader.load('./assets/lunar-height.png');heightMap.wrapS=THREE.RepeatWrapping;heightMap.anisotropy=surface.anisotropy;
+ const surface=textureLoader.load('./assets/lunar-surface.webp');surface.wrapS=THREE.RepeatWrapping;surface.anisotropy=renderer.capabilities.getMaxAnisotropy();
+ const heightMap=textureLoader.load('./assets/lunar-height.webp');heightMap.wrapS=THREE.RepeatWrapping;heightMap.anisotropy=surface.anisotropy;
  material.bumpMap=surface;material.bumpScale=.075;material.displacementMap=heightMap;material.displacementScale=.055;material.displacementBias=-.0275;
  material.roughness=.3;material.metalness=.12;material.clearcoat=.75;material.clearcoatRoughness=.26;material.envMapIntensity=1;material.specularIntensity=.35;
  material.color.setHex(0x264aef);material.emissive.setHex(0x264aef);material.emissiveIntensity=.12;
