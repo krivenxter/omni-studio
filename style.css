@@ -352,3 +352,15 @@ ul li::marker{color:var(--blue)}.direction-scale li::marker,.contact li::marker{
  .strategy-nav .strategy-tabs{margin-bottom:0}
  .ai-console .ai-dialogue{padding:8px 20px 20px;gap:16px}
 }
+
+/* Align format introduction with its content column. */
+.strategies>.section-heading{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:end}
+.strategies .formats-caption{max-width:none;width:100%;margin:0;padding-left:24px}
+.strategies{position:relative;isolation:isolate;padding-bottom:48px}
+.strategies:after{content:'';position:absolute;z-index:-1;left:0;bottom:0;width:50%;height:240px;background:radial-gradient(ellipse at 48% 115%,#264aef32 0%,#6381ff18 36%,transparent 72%);pointer-events:none}
+.text-link .icon{transform:rotate(0deg);transform-origin:center;transition:transform .3s cubic-bezier(.2,.7,.3,1)}
+.text-link:hover .icon,.text-link:focus-visible .icon{transform:rotate(45deg)}
+@media(max-width:640px){.strategies>.section-heading{display:block}.strategies .formats-caption{padding-left:0;margin-top:20px}.strategies:after{display:none}}
+@media(prefers-reduced-motion:reduce){.text-link .icon{transition:none}}
+
+.strategies + .process{margin-top:0}
