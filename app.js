@@ -35,7 +35,7 @@ menuButton.addEventListener('click',()=>{const open=menuButton.getAttribute('ari
 navigation.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMenu));
 document.addEventListener('keydown',event=>{if(event.key==='Escape')closeMenu();});
 let previousFocus;
-function openDialog(dialog){previousFocus=document.activeElement;dialog.showModal();document.body.style.overflow='hidden';}
+function openDialog(dialog){previousFocus=document.activeElement;dialog.showModal();}
 function closeDialog(dialog){
  if(dialog.id!=='chat-dialog'||matchMedia('(prefers-reduced-motion: reduce)').matches){dialog.close();return;}
  if(dialog.classList.contains('is-closing'))return;
