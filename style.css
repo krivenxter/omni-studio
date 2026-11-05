@@ -258,3 +258,5 @@ h1,h2,h3{text-wrap:balance}p,summary,.strategy-tabs strong,.message{text-wrap:pr
 .planet-poster-only .planet-pause{opacity:1;pointer-events:auto}
 .planet-poster-only .planet-pause:disabled{opacity:.5}
 .process-list li:not(.is-active){opacity:.6}
+
+@media(max-width:640px){.hero-art canvas,.hero-art .planet-static,.hero-art .planet-poster{mask-image:linear-gradient(to bottom,transparent 0%,#000 13%,#000 82%,transparent 100%);mask-composite:add}}
