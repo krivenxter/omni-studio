@@ -247,3 +247,6 @@ h1,h2,h3{text-wrap:balance}p,summary,.strategy-tabs strong,.message{text-wrap:pr
 .direction-scale .scale-network{flex-shrink:0;margin-top:auto;margin-bottom:24px}
 .photo-composition{flex-shrink:0}
 @media(min-width:641px){.photo-composition{height:350px}.direction-scale .scale-network{height:250px}}
+
+@media(min-width:641px){.photo-composition{margin-top:38px}}
+@media(max-width:640px){.process-visual .build-create .scene-card rect{height:72px}.process-visual .build-create .scene-card use{x:10px;y:4px}.process-visual .build-create .scene-card text{x:14px;y:58px}}
