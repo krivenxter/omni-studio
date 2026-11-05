@@ -201,7 +201,7 @@ function pinProcess(){
  processSlot.style.height=height+'px';
  const mobilePin=innerWidth<=640;
  const slotRect=processSlot.getBoundingClientRect();
- const top=document.querySelector('.header').getBoundingClientRect().bottom+(mobilePin?0:16);
+ const top=Math.max(0,document.querySelector('.header').getBoundingClientRect().bottom)+(mobilePin?0:16);
  processHeading.style.setProperty('--process-pin-left',(mobilePin?0:slotRect.left)+'px');
  processHeading.style.setProperty('--process-pin-width',(mobilePin?innerWidth:slotRect.width)+'px');
  const start=processSlot.getBoundingClientRect().top;
