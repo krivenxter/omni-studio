@@ -54,7 +54,21 @@ document.querySelectorAll('dialog').forEach(dialog=>{
 });
 document.querySelectorAll('[data-open-legal]').forEach(button=>button.addEventListener('click',()=>openDialog(document.getElementById('legal-dialog'))));
 const chat=document.getElementById('chat-dialog');
-document.querySelectorAll('[data-open-chat]').forEach(button=>button.addEventListener('click',()=>{openDialog(chat);if(window.OMNI_BOT.chatUrl)document.getElementById('chat-input').focus();}));
+// Mobile keyboards shrink the visual viewport, not necessarily CSS viewport units.
+function fitChatToViewport(){
+ if(!chat.open||!matchMedia('(max-width: 640px)').matches)return;
+ const viewport=window.visualViewport;
+ const visibleHeight=viewport?.height??window.innerHeight;
+ const height=Math.max(0,Math.min(700,visibleHeight-16));
+ chat.style.setProperty('--chat-visible-height',height+'px');
+ chat.style.setProperty('--chat-visible-top',((viewport?.offsetTop??0)+visibleHeight-height-8)+'px');
+}
+window.visualViewport?.addEventListener('resize',fitChatToViewport);
+window.visualViewport?.addEventListener('scroll',fitChatToViewport);
+window.addEventListener('resize',fitChatToViewport);
+chat.addEventListener('close',()=>{chat.style.removeProperty('--chat-visible-height');chat.style.removeProperty('--chat-visible-top');});
+
+document.querySelectorAll('[data-open-chat]').forEach(button=>button.addEventListener('click',()=>{openDialog(chat);fitChatToViewport();if(window.OMNI_BOT.chatUrl)document.getElementById('chat-input').focus();}));
 const botUrl=window.OMNI_BOT.chatUrl;
 const chatForm=document.getElementById('chat-form');
 let chatSession=crypto.randomUUID();
@@ -188,3 +202,12 @@ function sizeStrategyPanel(){
 new ResizeObserver(sizeStrategyPanel).observe(strategyPanel);
 document.fonts.ready.then(()=>{strategyPanelWidth=0;sizeStrategyPanel();});
 
+
+// Chrome iOS can move its visual viewport while collapsing browser controls.
+if(/CriOS\//.test(navigator.userAgent)&&window.visualViewport){
+ const syncChromeViewport=()=>document.documentElement.style.setProperty('--chrome-visible-top',Math.max(0,window.visualViewport.offsetTop)+'px');
+ window.visualViewport.addEventListener('resize',syncChromeViewport);
+ window.visualViewport.addEventListener('scroll',syncChromeViewport);
+ window.addEventListener('pageshow',syncChromeViewport);
+ syncChromeViewport();
+}

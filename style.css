@@ -445,7 +445,10 @@ ul li::marker{color:var(--blue)}.direction-scale li::marker,.contact li::marker{
 .process-footer:before{max-width:100%}
 .process-story .section-heading{position:sticky;top:106px;align-self:start;transform:none}
 @media(max-width:640px){
- .header{position:sticky;top:0}
- .process-story .section-heading{top:80px}
+ .header{position:sticky;top:var(--chrome-visible-top,0px)}
+ .process-story .section-heading{top:calc(80px + var(--chrome-visible-top,0px))}
  .chat-launcher,.chat-launcher:hover{transform:none;transition:none;bottom:calc(14px + env(safe-area-inset-bottom,0px))}
 }
+
+/* Keep the mobile composer above the on-screen keyboard. */
+@media(max-width:640px){.chat-dialog{position:fixed;inset:auto;top:var(--chat-visible-top,8px);left:0;margin:0 8px;height:var(--chat-visible-height,calc(100dvh - 16px));max-height:var(--chat-visible-height,calc(100dvh - 16px))}}
