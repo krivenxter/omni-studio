@@ -188,15 +188,18 @@ function sizeStrategyPanel(){
 new ResizeObserver(sizeStrategyPanel).observe(strategyPanel);
 document.fonts.ready.then(()=>{strategyPanelWidth=0;sizeStrategyPanel();});
 
-// Keep the mobile scene visible even in WebViews with unreliable sticky support.
+// Keep the process scene visible throughout its section on every viewport.
 const processHeading=document.querySelector('.process-story .section-heading');
 const processSlot=document.createElement('div');processSlot.className='process-pin-slot';
 processHeading.before(processSlot);processSlot.append(processHeading);
 function pinProcess(){
- if(innerWidth>640){processHeading.classList.remove('is-pinned');processSlot.style.height='';return;}
  const height=processHeading.getBoundingClientRect().height;
  processSlot.style.height=height+'px';
- const top=document.querySelector('.header').getBoundingClientRect().bottom;
+ const mobilePin=innerWidth<=640;
+ const slotRect=processSlot.getBoundingClientRect();
+ const top=document.querySelector('.header').getBoundingClientRect().bottom+(mobilePin?0:16);
+ processHeading.style.setProperty('--process-pin-left',(mobilePin?0:slotRect.left)+'px');
+ processHeading.style.setProperty('--process-pin-width',(mobilePin?innerWidth:slotRect.width)+'px');
  const start=processSlot.getBoundingClientRect().top;
  const end=document.querySelector('.process-story').getBoundingClientRect().bottom;
  const pinned=start<top&&end>top;

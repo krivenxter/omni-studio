@@ -432,3 +432,6 @@ ul li::marker{color:var(--blue)}.direction-scale li::marker,.contact li::marker{
 }
 
 @media(max-width:640px){.process-footer:before{max-width:100%}}
+
+.process-pin-slot{position:relative;min-width:0;align-self:start}
+.process-story .section-heading.is-pinned{position:fixed;top:var(--process-pin-top,96px);left:var(--process-pin-left,0px);width:var(--process-pin-width,100%);margin:0;box-sizing:border-box;z-index:5;transform:none}
