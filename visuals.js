@@ -24,10 +24,11 @@ function renderStrategy(index){const el=document.getElementById('strategy-graphi
 function renderProcess(stage){
  stage=[0,1,2,4][stage];
  const scene=document.getElementById('process-scene');
+ scene.classList.toggle('process-complete',stage===4);
  if(!scene.querySelector('svg')){
   const research=`<g class="process-layer build-research" data-from="0">${visualCard(20,28,125,80,'Бизнес','store')}${visualCard(20,133,125,80,'Аудитория','user')}${line('M145 67H185V115H225M145 173H185V115')}</g>`;
   const lens=`<g class="research-lens" data-only="0"><circle cx="300" cy="115" r="60"/>${visualIcon('search',268,83,64)}<text x="245" y="210">Аудит</text></g>`;
-  const plan=`<g class="process-layer build-plan" data-from="1">${visualCard(225,70,150,98,'Стратегия','plan',true)}<g class="check-seal" transform="translate(344 88)"><circle r="10"/>${visualIcon('check',-6,-6,12)}</g></g>`;
+  const plan=`<g class="process-layer build-plan" data-from="1">${visualCard(225,70,150,98,'Стратегия','plan',true)}</g>`;
   const create=`<g class="process-layer build-create" data-from="2">${line('M300 70V36H429M375 119H429M300 168V202H429')}${visualCard(429,7,110,63,'Съёмка','camera')}${visualCard(429,85,110,63,'Контент','film')}${visualCard(429,163,110,63,'Форматы','layout')}</g>`;
   const release=`<g class="process-layer build-release" data-from="3"><path class="release-path" d="M484 226Q484 257 375 257H239"/><g class="release-badge"><rect x="225" y="237" width="154" height="38" rx="19"/>${visualIcon('send',239,246,20)}<text x="267" y="261">Аналитика</text></g></g>`;
   const success=`<g class="process-layer build-success" data-from="4"><circle class="success-aura" cx="300" cy="119" r="79"/><path class="success-chart" d="m264 138 21-20 19 9 32-27"/><g class="check-seal success-seal" transform="translate(300 177)"><circle r="17"/>${visualIcon('check',-10,-10,20)}</g></g>`;

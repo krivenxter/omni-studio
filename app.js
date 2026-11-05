@@ -123,7 +123,7 @@ document.querySelectorAll('details').forEach(details=>{
   animation.onfinish=()=>{details.open=!closing;delete details.dataset.closing;details.style.overflow='';animation=null;};
  });
 });
-renderStrategy(0);
+selectStrategy(0);
 const photoObserver=new IntersectionObserver(entries=>entries.forEach(entry=>entry.target.classList.toggle('is-assembled',entry.isIntersecting)),{threshold:.2});
 document.querySelectorAll('.directions').forEach(element=>photoObserver.observe(element));
 const contactSection=document.getElementById('contact');
@@ -158,3 +158,25 @@ if(tariffsSection&&!motionPreference.matches){
  const tariffsObserver=new IntersectionObserver(entries=>{if(entries.some(entry=>entry.isIntersecting)){tariffsSection.classList.add('tariffs-visible');tariffsObserver.disconnect();}},{threshold:.18});
  tariffsObserver.observe(tariffsSection);
 }
+// Reserve the tallest format at the current width without stretching the tab list.
+const strategyPanel=document.getElementById('strategy-panel');
+let strategyPanelWidth=0;
+function sizeStrategyPanel(){
+ const width=Math.round(strategyPanel.getBoundingClientRect().width);
+ if(width===strategyPanelWidth)return;
+ strategyPanelWidth=width;
+ if(innerWidth<=640){strategyPanel.style.removeProperty('--strategy-height');return;}
+ const probe=strategyPanel.cloneNode(true);
+ Object.assign(probe.style,{position:'fixed',left:'-10000px',top:'0',width:`${width}px`,minHeight:'0',visibility:'hidden',pointerEvents:'none'});
+ probe.querySelector('details').open=false;document.body.append(probe);
+ let height=0;
+ strategies.forEach(data=>{
+  ['title','description','audience'].forEach(key=>probe.querySelector(`#strategy-${key}`).textContent=typeset(data[key]));
+  const list=probe.querySelector('#strategy-kpi'),template=list.firstElementChild.cloneNode(true);
+  list.replaceChildren(...data.kpi.split(';').map(text=>{const row=template.cloneNode(true);row.querySelector('span').textContent=typeset(text.trim());return row;}));
+  height=Math.max(height,probe.offsetHeight);
+ });
+ probe.remove();strategyPanel.style.setProperty('--strategy-height',`${height}px`);
+}
+new ResizeObserver(sizeStrategyPanel).observe(strategyPanel);
+document.fonts.ready.then(()=>{strategyPanelWidth=0;sizeStrategyPanel();});

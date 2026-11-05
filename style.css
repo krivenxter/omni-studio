@@ -281,3 +281,38 @@ h1,h2,h3{text-wrap:balance}p,summary,.strategy-tabs strong,.message{text-wrap:pr
 @media(max-width:640px){.strategy-scene .scene-card text,.process-visual .scene-card text{font-size:var(--text-body)}.process-visual .build-create .scene-card use{x:14px;y:12px;width:22px;height:22px}.process-visual .build-create .scene-card text{x:14px;y:58px}.process-visual .build-create .scene-card rect{height:72px}.strategy-panel{padding:var(--space-4)}.direction h3,.direction-scale h3,.strategy-panel h3{font-size:var(--text-card)}.photo-composition .photo-card>span{font-size:var(--text-meta)}}
 
 .strategy-facts #strategy-kpi span{font-size:var(--text-body);line-height:1.6;color:var(--ink);text-transform:none;letter-spacing:normal}.strategy-facts #strategy-kpi .icon{margin-top:3px}.formats-caption{font-size:var(--text-body);line-height:1.6}.funnel use{color:white}
+
+/* Restore component geometry that must not inherit the generic icon/UI scale. */
+.footer{padding-inline:max(24px,calc((100% - 1328px)/2));padding-block:48px}
+.footer-top{display:flex;justify-content:space-between;align-items:center;gap:24px;padding-bottom:24px;width:100%}
+.footer .logo{display:block;width:160px;flex:0 0 160px}.footer .logo img{display:block;width:160px;height:auto;visibility:visible;opacity:1;filter:none}
+.footer .back-top,.footer-bottom button{display:inline-flex;align-items:center;gap:12px;white-space:nowrap}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;width:100%}
+.footer-bottom>span{white-space:nowrap}
+ul li::marker{color:var(--blue)}.direction-scale li::marker,.contact li::marker{color:var(--lime)}
+.direction-scale #strategy-kpi .icon,.contact #strategy-kpi .icon{color:var(--lime)}
+.lead-network .icon.lead-origin{width:22px;height:22px;left:7px;top:6px}
+.lead-network .icon.lead-branch{width:11px;height:11px;left:60px}
+.lead-network .branch-a{top:0}.lead-network .branch-b{top:12px}.lead-network .branch-c{top:24px}
+.lead-client-check{width:17px;height:17px;stroke-width:1.75;color:var(--blue)}
+.check-seal{color:#304426}.check-seal use{stroke:currentColor;color:#304426}
+#process-scene.process-complete .build-plan .scene-card>use,#process-scene.process-complete .build-plan .scene-card>text{opacity:0}
+.contact .text-link:hover,.contact .text-link:focus-visible{color:var(--lime)}
+.strategy-layout{align-items:start;overflow-anchor:none}
+.strategy-tabs{display:flex;flex-direction:column;align-self:start}
+.strategy-tabs button{flex:none;min-height:64px;padding:16px;align-items:center}
+.strategy-tabs strong{font-size:20px;line-height:1.3}
+.strategy-panel{min-height:600px;padding:24px;display:block;overflow-anchor:none}
+.strategy-panel .strategy-graphic{height:140px;margin-bottom:16px}
+.strategy-panel h3{font-size:24px;line-height:1.2;margin-bottom:12px;max-width:none}
+.strategy-panel>p,.strategy-panel .strategy-facts p,.strategy-facts #strategy-kpi span{font-size:14px;line-height:1.5;max-width:none}
+.strategy-panel .strategy-facts{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;margin-block:16px;padding-top:16px}
+.strategy-panel #strategy-kpi{gap:8px;margin:8px 0 0}.strategy-panel #strategy-kpi li{gap:8px;grid-template-columns:16px minmax(0,1fr)}
+.strategy-panel #strategy-kpi .icon{width:16px;height:16px;margin-top:2px}
+.strategy-panel .strategy-details{margin-bottom:16px;padding-top:12px}
+.strategy-panel>.text-link{margin-top:0}
+@media(max-width:640px){.footer{padding-inline:20px;padding-bottom:96px}.footer-top{gap:16px}.footer-bottom{gap:16px}.footer .logo,.footer .logo img{width:140px}.footer .logo{flex-basis:140px}.strategy-tabs{display:grid;grid-template-columns:1fr 1fr}.strategy-tabs button{min-height:64px;padding:12px}.strategy-tabs strong{font-size:14px}.strategy-panel{min-height:0;padding:20px}.strategy-panel h3{font-size:24px}.strategy-panel .strategy-facts{grid-template-columns:1fr}.strategy-panel .strategy-graphic{height:160px}}
+
+@media(min-width:641px){.strategy-panel{min-height:var(--strategy-height,600px)}}
+
+.lead-network .branch-b{top:11px}.lead-network .branch-c{top:22px}.footer-bottom{justify-content:flex-start}
