@@ -445,7 +445,7 @@ ul li::marker{color:var(--blue)}.direction-scale li::marker,.contact li::marker{
 .process-footer:before{max-width:100%}
 .process-story .section-heading{position:sticky;top:106px;align-self:start;transform:none}
 @media(max-width:640px){
- .header{position:sticky;top:0}
- .process-story .section-heading{top:80px}
+ .header{position:sticky;top:env(safe-area-inset-top,0px)}
+ .process-story .section-heading{top:calc(80px + env(safe-area-inset-top,0px))}
  .chat-launcher,.chat-launcher:hover{transform:none;transition:none;bottom:calc(14px + env(safe-area-inset-bottom,0px))}
 }

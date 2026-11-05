@@ -1,3 +1,6 @@
+// Expose native iOS safe-area insets in the Tilda document as well.
+const viewportMeta=document.querySelector('meta[name=viewport]');
+if(viewportMeta&&!viewportMeta.content.includes('viewport-fit'))viewportMeta.content+=', viewport-fit=cover';
 'use strict';
 const typeset=text=>text.replace(/(^|[\s«(])(а|в|во|и|к|ко|на|о|об|обо|от|по|с|со|у|за|из|до|не|но|для|при|или|без|над|под) +(?=\S)/giu,'$1$2\u00a0');
 const tabs = [...document.querySelectorAll('[data-strategy]')];
