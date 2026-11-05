@@ -1,3 +1,5 @@
+// Shared links must use HTTPS, including links opened inside messengers.
+if(location.protocol==='http:'&&location.hostname==='o-mni.ru')location.replace('https://o-mni.ru'+location.pathname+location.search+location.hash);
 'use strict';
 const typeset=text=>text.replace(/(^|[\s«(])(а|в|во|и|к|ко|на|о|об|обо|от|по|с|со|у|за|из|до|не|но|для|при|или|без|над|под) +(?=\S)/giu,'$1$2\u00a0');
 const tabs = [...document.querySelectorAll('[data-strategy]')];
@@ -71,7 +73,7 @@ chat.addEventListener('close',()=>{chat.style.removeProperty('--chat-visible-hei
 document.querySelectorAll('[data-open-chat]').forEach(button=>button.addEventListener('click',()=>{openDialog(chat);fitChatToViewport();if(window.OMNI_BOT.chatUrl)document.getElementById('chat-input').focus();}));
 const botUrl=window.OMNI_BOT.chatUrl;
 const chatForm=document.getElementById('chat-form');
-let chatSession=crypto.randomUUID();
+let chatSession=typeof crypto.randomUUID==='function'?crypto.randomUUID():Array.from(crypto.getRandomValues(new Uint8Array(16)),byte=>byte.toString(16).padStart(2,'0')).join('');
 try { chatSession=sessionStorage.getItem('omni-chat-session')||chatSession;sessionStorage.setItem('omni-chat-session',chatSession); } catch {}
 function addChatMessage(text,role){const element=document.createElement('div');element.className=`message ${role}`;element.textContent=text;document.getElementById('chat-log').append(element);const log=document.getElementById('chat-log');log.scrollTop=log.scrollHeight;}
 if(botUrl){
