@@ -334,3 +334,11 @@ ul li::marker{color:var(--blue)}.direction-scale li::marker,.contact li::marker{
  .strategy-tabs button[aria-selected=true]{border-color:var(--ink);border-radius:8px}
  .strategy-panel{margin-top:0}
 }
+
+.strategy-swipe-hint{display:none}
+@media(max-width:640px){
+ .strategy-swipe-hint{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-bottom:12px;color:var(--muted);font-size:12px;line-height:1.3}
+ .strategy-swipe-hint .icon{width:14px;height:14px}.strategy-swipe-hint .swipe-left{transform:rotate(180deg)}
+ .strategy-tabs{scrollbar-width:none;-ms-overflow-style:none;mask-image:linear-gradient(to right,transparent,#000 16px,#000 calc(100% - 16px),transparent);padding-inline:16px;padding-bottom:0;scroll-padding-inline:16px}
+ .strategy-tabs::-webkit-scrollbar{display:none}
+}
