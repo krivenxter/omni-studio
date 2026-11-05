@@ -4,7 +4,7 @@ let started=false;
 async function startPlanet(){
  if(started)return;
  started=true;control.disabled=true;
- try{await import('./planet.js?v=59');host.classList.remove('planet-poster-only');}
+ try{await import('./planet.js?v=60');host.classList.remove('planet-poster-only');}
  catch{host.classList.add('planet-fallback');}
  finally{control.disabled=false;}
 }
