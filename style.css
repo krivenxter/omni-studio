@@ -257,7 +257,7 @@ h1,h2,h3{text-wrap:balance}p,summary,.strategy-tabs strong,.message{text-wrap:pr
 .planet-fallback .planet-static{display:none}
 .planet-poster-only .planet-pause{opacity:1;pointer-events:auto}
 .planet-poster-only .planet-pause:disabled{opacity:.5}
-.process-list li:not(.is-active){opacity:.6}
+.process-list li:not(.is-active){opacity:1}
 
 @media(max-width:640px){.hero-art canvas,.hero-art .planet-static,.hero-art .planet-poster{mask-image:linear-gradient(to bottom,transparent 0%,#000 13%,#000 82%,transparent 100%);mask-composite:add}}
 
@@ -395,3 +395,6 @@ ul li::marker{color:var(--blue)}.direction-scale li::marker,.contact li::marker{
  .chat-launcher .chat-icon,.chat-launcher small{display:none}
  .chat-launcher>span:last-child{display:block;max-width:92px;font-size:14px;line-height:1.25;font-weight:500}
 }
+
+/* Paint the opening copy immediately, without waiting for reveal observers. */
+.hero .reveal{opacity:1;transform:none;transition:none}
