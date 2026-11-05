@@ -366,3 +366,10 @@ ul li::marker{color:var(--blue)}.direction-scale li::marker,.contact li::marker{
 .strategies + .process{margin-top:0}
 
 @media(min-width:641px){.strategies:before{content:'';position:absolute;z-index:-1;left:0;bottom:0;width:50%;height:250px;background:repeating-radial-gradient(ellipse at 44% 145%,transparent 0 53px,#264aef24 54px 55px,transparent 56px 91px);mask-image:radial-gradient(ellipse at 48% 100%,#000 12%,transparent 75%);pointer-events:none}}
+
+@media(min-width:641px){
+ .strategy-nav{display:flex;flex-direction:column;align-self:start;min-width:0}
+ .strategy-nav #strategy-cta{align-self:flex-start;width:auto;max-width:100%;margin-top:32px;gap:32px}
+}
+
+.strategy-nav>.strategy-tabs{width:100%}

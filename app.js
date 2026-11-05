@@ -2,7 +2,11 @@
 const typeset=text=>text.replace(/(^|[\s«(])(а|в|во|и|к|ко|на|о|об|обо|от|по|с|со|у|за|из|до|не|но|для|при|или|без|над|под) +(?=\S)/giu,'$1$2\u00a0');
 const tabs = [...document.querySelectorAll('[data-strategy]')];
 const mobileTabs=matchMedia('(max-width: 640px)');
-const orientTabs=()=>tabs[0].parentElement.setAttribute('aria-orientation',mobileTabs.matches?'horizontal':'vertical');
+const orientTabs=()=>{
+ tabs[0].parentElement.setAttribute('aria-orientation',mobileTabs.matches?'horizontal':'vertical');
+ const cta=document.getElementById('strategy-cta');
+ if(cta)(mobileTabs.matches?document.getElementById('strategy-panel'):document.querySelector('.strategy-nav')).append(cta);
+};
 mobileTabs.addEventListener('change',orientTabs);orientTabs();
 function selectStrategy(index, focus = false) {
  const data = strategies[index];
