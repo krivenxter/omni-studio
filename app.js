@@ -6,7 +6,7 @@ function selectStrategy(index, focus = false) {
  tabs.forEach((tab,i) => { tab.setAttribute('aria-selected',String(i===index));tab.tabIndex=i===index?0:-1; });
  const fields={title:data.title,description:data.description,audience:data.audience,limit:data.limit};
  Object.entries(fields).forEach(([key,value]) => { document.getElementById(`strategy-${key}`).textContent=typeset(value); });
- const kpis=document.getElementById('strategy-kpi');kpis.replaceChildren(...data.kpi.split(';').map(text=>{const item=document.createElement('li');item.textContent=typeset(text.trim());return item;}));
+ const kpis=document.getElementById('strategy-kpi');kpis.replaceChildren(...data.kpi.split(';').map(text=>{const item=document.createElement('li');const mark=document.createElementNS('http://www.w3.org/2000/svg','svg');mark.setAttribute('class','icon');mark.setAttribute('viewBox','0 0 24 24');mark.setAttribute('aria-hidden','true');const use=document.createElementNS('http://www.w3.org/2000/svg','use');use.setAttribute('href','#i-check');mark.append(use);const label=document.createElement('span');label.textContent=typeset(text.trim());item.append(mark,label);return item;}));
  document.getElementById('strategy-title').style.whiteSpace='pre-line';
  document.getElementById('strategy-panel').setAttribute('aria-labelledby',`tab-${index}`);
  document.querySelector('.strategy-details').open=false;
