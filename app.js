@@ -192,6 +192,10 @@ document.fonts.ready.then(()=>{strategyPanelWidth=0;sizeStrategyPanel();});
 const processHeading=document.querySelector('.process-story .section-heading');
 const processSlot=document.createElement('div');processSlot.className='process-pin-slot';
 processHeading.before(processSlot);processSlot.append(processHeading);
+const processStory=processSlot.closest('.process-story');
+const processFloating=document.createElement('div');processFloating.className='process process-floating';
+const processFloatingStory=document.createElement('div');processFloatingStory.className='process-story';
+processFloating.append(processFloatingStory);document.body.append(processFloating);
 function pinProcess(){
  const height=processHeading.getBoundingClientRect().height;
  processSlot.style.height=height+'px';
@@ -201,9 +205,18 @@ function pinProcess(){
  processHeading.style.setProperty('--process-pin-left',(mobilePin?0:slotRect.left)+'px');
  processHeading.style.setProperty('--process-pin-width',(mobilePin?innerWidth:slotRect.width)+'px');
  const start=processSlot.getBoundingClientRect().top;
- const end=document.querySelector('.process-story').getBoundingClientRect().bottom;
+ const end=processStory.getBoundingClientRect().bottom;
  const pinned=start<top&&end>top;
- processHeading.classList.toggle('is-pinned',pinned);
- processHeading.style.setProperty('--process-pin-top',Math.min(top,end-height)+'px');
+ if(pinned){
+  if(processHeading.parentElement!==processFloatingStory)processFloatingStory.append(processHeading);
+  processFloating.style.display='block';
+  processFloating.style.top=Math.min(top,end-height)+'px';
+  processFloating.style.left=(mobilePin?0:slotRect.left)+'px';
+  processFloating.style.width=(mobilePin?document.documentElement.clientWidth:slotRect.width)+'px';
+ }else{
+  if(processHeading.parentElement!==processSlot)processSlot.append(processHeading);
+  processFloating.style.display='none';
+ }
+ processHeading.classList.remove('is-pinned');
 }
 addEventListener('scroll',pinProcess,{passive:true});addEventListener('resize',pinProcess);pinProcess();
