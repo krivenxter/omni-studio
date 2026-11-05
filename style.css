@@ -357,15 +357,15 @@ ul li::marker{color:var(--blue)}.direction-scale li::marker,.contact li::marker{
 .strategies>.section-heading{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:end}
 .strategies .formats-caption{max-width:none;width:100%;margin:0;padding-left:24px}
 .strategies{position:relative;isolation:isolate;padding-bottom:48px}
-.strategies:after{content:'';position:absolute;z-index:-1;left:0;bottom:0;width:50%;height:250px;background:radial-gradient(ellipse at 48% 115%,#264aef99 0%,#4167f65c 28%,#829bff30 48%,transparent 74%);pointer-events:none}
+
 .text-link .icon{transform:rotate(0deg);transform-origin:center;transition:transform .3s cubic-bezier(.2,.7,.3,1)}
 .text-link:hover .icon,.text-link:focus-visible .icon{transform:rotate(45deg)}
-@media(max-width:640px){.strategies>.section-heading{display:block}.strategies .formats-caption{padding-left:0;margin-top:20px}.strategies:after{display:none}}
+@media(max-width:640px){.strategies>.section-heading{display:block}.strategies .formats-caption{padding-left:0;margin-top:20px}}
 @media(prefers-reduced-motion:reduce){.text-link .icon{transition:none}}
 
 .strategies + .process{margin-top:0}
 
-@media(min-width:641px){.strategies:before{content:'';position:absolute;z-index:-1;left:0;bottom:0;width:50%;height:250px;background:repeating-radial-gradient(ellipse at 44% 145%,transparent 0 53px,#264aef24 54px 55px,transparent 56px 91px);mask-image:radial-gradient(ellipse at 48% 100%,#000 12%,transparent 75%);pointer-events:none}}
+@media(min-width:641px){}
 
 @media(min-width:641px){
  .strategy-nav{display:flex;flex-direction:column;align-self:start;min-width:0}
@@ -373,3 +373,11 @@ ul li::marker{color:var(--blue)}.direction-scale li::marker,.contact li::marker{
 }
 
 .strategy-nav>.strategy-tabs{width:100%}
+
+@media(min-width:641px){
+ .strategy-layout{align-items:stretch}
+ .strategy-nav{align-self:stretch;padding-bottom:24px}
+ .strategy-nav #strategy-cta{width:100%;margin-top:auto;min-height:32px;padding-top:8px}
+ .strategy-panel{display:flex;flex-direction:column}
+ .strategy-panel .strategy-details{margin-top:auto;margin-bottom:0}
+}
