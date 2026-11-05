@@ -427,25 +427,25 @@ ul li::marker{color:var(--blue)}.direction-scale li::marker,.contact li::marker{
 @media(max-width:640px){
  .hero-art canvas,.hero-art .planet-static{-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 12%,#000 80%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0%,#000 12%,#000 80%,transparent 100%)}
  .process{overflow:visible}
- .process-pin-slot{position:relative}
- .process-story .section-heading.is-pinned{position:fixed;top:var(--process-pin-top,80px);left:0;width:100%;margin:0;box-sizing:border-box}
 }
 
 @media(max-width:640px){.process-footer:before{max-width:100%}}
 
-.process-pin-slot{position:relative;min-width:0;align-self:start}
-.process-story .section-heading.is-pinned{position:fixed;top:var(--process-pin-top,96px);left:var(--process-pin-left,0px);width:var(--process-pin-width,100%);margin:0;box-sizing:border-box;z-index:5;transform:none}
-
 @media(max-width:640px){.chat-launcher{border-radius:999px;padding:8px 16px 8px 8px;gap:8px}.chat-launcher .chat-icon{display:flex;flex:0 0 38px;width:38px;height:38px}.chat-launcher>span:last-child{max-width:92px}.chat-launcher small{display:none}}
-
-/* Mount the pinned scene outside Tilda containers and their containing blocks. */
-.process.process-floating{position:fixed;display:none;margin:0;padding:0;z-index:8;background:var(--ink);overflow:visible;isolation:auto}
-.process-floating .process-story{display:block}
-.process-floating .section-heading{position:static!important;transform:none;margin:0;width:100%;padding:0}
-@media(max-width:640px){.process-floating .section-heading{padding:12px 20px 8px}.process-floating .section-heading h2{font-size:clamp(26px,7.5vw,36px);margin-bottom:8px}.process-floating .process-visual{height:clamp(130px,24svh,190px);margin-top:0}}
+@media(max-width:640px){}
 
 .hero h1 em{line-height:inherit}
 @media(min-width:641px){.hero-copy>p{margin-top:40px}.hero-actions{margin-top:36px}}
 @media(max-width:640px){.chat-launcher{padding:8px;gap:0}.chat-launcher>span:last-child{flex:0 0 116px;max-width:116px;padding-inline:12px;text-align:center}}
 
-@media(max-width:640px){.mobile-header-slot{height:80px}.header{position:fixed;top:0;left:8px;right:8px;width:calc(100% - 16px);margin:0;z-index:50}}
+@media(max-width:640px){}
+
+/* Native sticky navigation and process illustration share the document scroll. */
+.process{overflow:visible}
+.process-footer:before{max-width:100%}
+.process-story .section-heading{position:sticky;top:106px;align-self:start;transform:none}
+@media(max-width:640px){
+ .header{position:sticky;top:0}
+ .process-story .section-heading{top:80px}
+ .chat-launcher,.chat-launcher:hover{transform:none;transition:none;bottom:calc(14px + env(safe-area-inset-bottom,0px))}
+}
