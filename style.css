@@ -250,3 +250,9 @@ h1,h2,h3{text-wrap:balance}p,summary,.strategy-tabs strong,.message{text-wrap:pr
 
 @media(min-width:641px){.photo-composition{margin-top:38px}}
 @media(max-width:640px){.process-visual .build-create .scene-card rect{height:72px}.process-visual .build-create .scene-card use{x:10px;y:4px}.process-visual .build-create .scene-card text{x:14px;y:58px}}
+
+.planet-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none}
+.planet-ready .planet-poster{visibility:hidden}
+.planet-poster-only .planet-pause{opacity:1;pointer-events:auto}
+.planet-poster-only .planet-pause:disabled{opacity:.5}
+.process-list li:not(.is-active){opacity:.6}
