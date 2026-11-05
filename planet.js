@@ -106,7 +106,8 @@ if(renderer){
   const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints(points),new THREE.LineBasicMaterial({color:index===1?0x7c95bd:0x476beb,transparent:true,opacity:.34}));audience.add(line);return line;
  });
  let pointerX=0,pointerY=0,scroll=0,visible=true,paused=reduced.matches,elapsed=0,last=performance.now(),frame;
- function resize(){const {width,height}=host.getBoundingClientRect();renderer.setSize(width,height);camera.aspect=width/height;camera.position.z=camera.aspect<1.25?7.8:7.2;camera.updateProjectionMatrix();}
+ let canvasWidth=0,canvasHeight=0;
+ function resize(){const rect=host.getBoundingClientRect();const width=Math.round(rect.width),height=Math.round(rect.height);if(!width||!height||(width===canvasWidth&&height===canvasHeight))return;canvasWidth=width;canvasHeight=height;renderer.setSize(width,height);camera.aspect=width/height;camera.position.z=camera.aspect<1.25?7.8:7.2;camera.updateProjectionMatrix();}
  new ResizeObserver(resize).observe(host);
  document.querySelector('.hero').addEventListener('pointermove',event=>{if(event.pointerType==='touch')return;const box=host.getBoundingClientRect();pointerX=Math.max(-.8,Math.min(.8,(event.clientX-box.left)/box.width-.5));pointerY=Math.max(-.7,Math.min(.7,(event.clientY-box.top)/box.height-.5));});
  document.querySelector('.hero').addEventListener('pointerleave',()=>{pointerX=0;pointerY=0;});
