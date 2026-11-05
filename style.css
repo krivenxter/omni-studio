@@ -240,3 +240,10 @@ h1,h2,h3{text-wrap:balance}p,summary,.strategy-tabs strong,.message{text-wrap:pr
 .chat-dialog.is-closing::backdrop{animation:chatBackdropExit .2s ease-in forwards}
 @keyframes chatBackdropExit{to{background:transparent;backdrop-filter:blur(0)}}
 @media(prefers-reduced-motion:reduce){.chat-heading:before,.chat-dialog[open]{animation:none}}
+
+/* Keep direction titles above their illustrations and captions inside the cards. */
+.direction-scale{justify-content:flex-start}
+.direction-scale .direction-info{padding-top:0}
+.direction-scale .scale-network{flex-shrink:0;margin-top:auto;margin-bottom:24px}
+.photo-composition{flex-shrink:0}
+@media(min-width:641px){.photo-composition{height:350px}.direction-scale .scale-network{height:250px}}
