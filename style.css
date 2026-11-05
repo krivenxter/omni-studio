@@ -447,3 +447,5 @@ ul li::marker{color:var(--blue)}.direction-scale li::marker,.contact li::marker{
 .hero h1 em{line-height:inherit}
 @media(min-width:641px){.hero-copy>p{margin-top:40px}.hero-actions{margin-top:36px}}
 @media(max-width:640px){.chat-launcher{padding:8px;gap:0}.chat-launcher>span:last-child{flex:0 0 116px;max-width:116px;padding-inline:12px;text-align:center}}
+
+@media(max-width:640px){.mobile-header-slot{height:80px}.header{position:fixed;top:0;left:8px;right:8px;width:calc(100% - 16px);margin:0;z-index:50}}

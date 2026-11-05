@@ -220,3 +220,13 @@ function pinProcess(){
  processHeading.classList.remove('is-pinned');
 }
 addEventListener('scroll',pinProcess,{passive:true});addEventListener('resize',pinProcess);pinProcess();
+
+// Keep navigation fixed outside Tilda's scroll containers on touch browsers.
+const mobileHeader=document.querySelector('.header');
+const mobileHeaderSlot=document.createElement('div');mobileHeaderSlot.className='mobile-header-slot';mobileHeader.before(mobileHeaderSlot);
+function placeMobileHeader(){
+ if(innerWidth<=640){if(mobileHeader.parentElement!==document.body)document.body.append(mobileHeader);}
+ else if(mobileHeader.previousElementSibling!==mobileHeaderSlot)mobileHeaderSlot.after(mobileHeader);
+ pinProcess();
+}
+addEventListener('resize',placeMobileHeader);placeMobileHeader();
