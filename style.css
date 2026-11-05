@@ -430,3 +430,5 @@ ul li::marker{color:var(--blue)}.direction-scale li::marker,.contact li::marker{
  .process-pin-slot{position:relative}
  .process-story .section-heading.is-pinned{position:fixed;top:var(--process-pin-top,80px);left:0;width:100%;margin:0;box-sizing:border-box}
 }
+
+@media(max-width:640px){.process-footer:before{max-width:100%}}
