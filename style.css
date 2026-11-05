@@ -342,3 +342,13 @@ ul li::marker{color:var(--blue)}.direction-scale li::marker,.contact li::marker{
  .strategy-tabs{scrollbar-width:none;-ms-overflow-style:none;mask-image:linear-gradient(to right,transparent,#000 16px,#000 calc(100% - 16px),transparent);padding-inline:16px;padding-bottom:0;scroll-padding-inline:16px}
  .strategy-tabs::-webkit-scrollbar{display:none}
 }
+
+.strategy-nav{display:contents}
+.ai-bot-description{font-size:16px;line-height:1.6;color:#d9e1dc;margin:0}
+.ai-console .ai-dialogue{gap:20px;padding:8px 24px 24px}
+@media(max-width:640px){
+ .strategy-nav{display:block;position:sticky;top:80px;z-index:4;background:var(--paper);padding-block:12px;margin-bottom:16px}
+ .strategy-nav .strategy-swipe-hint{margin-bottom:8px}
+ .strategy-nav .strategy-tabs{margin-bottom:0}
+ .ai-console .ai-dialogue{padding:8px 20px 20px;gap:16px}
+}
