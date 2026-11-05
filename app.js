@@ -187,3 +187,20 @@ function sizeStrategyPanel(){
 }
 new ResizeObserver(sizeStrategyPanel).observe(strategyPanel);
 document.fonts.ready.then(()=>{strategyPanelWidth=0;sizeStrategyPanel();});
+
+// Keep the mobile scene visible even in WebViews with unreliable sticky support.
+const processHeading=document.querySelector('.process-story .section-heading');
+const processSlot=document.createElement('div');processSlot.className='process-pin-slot';
+processHeading.before(processSlot);processSlot.append(processHeading);
+function pinProcess(){
+ if(innerWidth>640){processHeading.classList.remove('is-pinned');processSlot.style.height='';return;}
+ const height=processHeading.getBoundingClientRect().height;
+ processSlot.style.height=height+'px';
+ const top=document.querySelector('.header').getBoundingClientRect().bottom;
+ const start=processSlot.getBoundingClientRect().top;
+ const end=document.querySelector('.process-story').getBoundingClientRect().bottom;
+ const pinned=start<top&&end>top;
+ processHeading.classList.toggle('is-pinned',pinned);
+ processHeading.style.setProperty('--process-pin-top',Math.min(top,end-height)+'px');
+}
+addEventListener('scroll',pinProcess,{passive:true});addEventListener('resize',pinProcess);pinProcess();

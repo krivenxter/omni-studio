@@ -423,3 +423,10 @@ ul li::marker{color:var(--blue)}.direction-scale li::marker,.contact li::marker{
  .motion-enabled .reveal,.network-branch{opacity:1;transform:none}
  .process-footer h2 span,.process-footer h2 b{opacity:1!important;transform:none!important}
 }
+
+@media(max-width:640px){
+ .hero-art canvas,.hero-art .planet-static{-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 12%,#000 80%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0%,#000 12%,#000 80%,transparent 100%)}
+ .process{overflow:visible}
+ .process-pin-slot{position:relative}
+ .process-story .section-heading.is-pinned{position:fixed;top:var(--process-pin-top,80px);left:0;width:100%;margin:0;box-sizing:border-box}
+}
