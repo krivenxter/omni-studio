@@ -1,6 +1,9 @@
 'use strict';
 const typeset=text=>text.replace(/(^|[\s«(])(а|в|во|и|к|ко|на|о|об|обо|от|по|с|со|у|за|из|до|не|но|для|при|или|без|над|под) +(?=\S)/giu,'$1$2\u00a0');
 const tabs = [...document.querySelectorAll('[data-strategy]')];
+const mobileTabs=matchMedia('(max-width: 640px)');
+const orientTabs=()=>tabs[0].parentElement.setAttribute('aria-orientation',mobileTabs.matches?'horizontal':'vertical');
+mobileTabs.addEventListener('change',orientTabs);orientTabs();
 function selectStrategy(index, focus = false) {
  const data = strategies[index];
  tabs.forEach((tab,i) => { tab.setAttribute('aria-selected',String(i===index));tab.tabIndex=i===index?0:-1; });
@@ -14,7 +17,7 @@ function selectStrategy(index, focus = false) {
  if(focus) tabs[index].focus();
 }
 tabs.forEach((tab,index)=>{
- tab.addEventListener('click',()=>{selectStrategy(index);if(matchMedia('(max-width: 640px)').matches)document.getElementById('strategy-panel').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});});
+ tab.addEventListener('click',()=>{selectStrategy(index);if(matchMedia('(max-width: 640px)').matches){const strip=tab.parentElement;strip.scrollTo({left:tab.offsetLeft-strip.offsetLeft-(strip.clientWidth-tab.offsetWidth)/2,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});}});
  tab.addEventListener('keydown',event=>{
   const moves={ArrowDown:1,ArrowUp:-1,ArrowRight:1,ArrowLeft:-1};
   if(event.key in moves){event.preventDefault();selectStrategy((index+moves[event.key]+tabs.length)%tabs.length,true);}
