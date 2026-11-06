@@ -490,3 +490,8 @@ ul li::marker{color:var(--blue)}.direction-scale li::marker,.contact li::marker{
 /* The bridge glow belongs to the process, behind the following paper section. */
 .franchise{position:relative;z-index:1;isolation:isolate}
 .franchise:before{content:'';position:absolute;inset:0 calc((100% - 100vw)/2);background:var(--paper);z-index:-1;pointer-events:none}
+
+/* Continue the header backdrop behind the inset used by iOS in-app toolbars. */
+@media(max-width:640px){
+ .header.is-scrolled:before{content:'';display:block;position:absolute;inset:-120px -8px 0;z-index:-1;border-radius:0;background:inherit;backdrop-filter:inherit;-webkit-backdrop-filter:inherit;pointer-events:none}
+}
