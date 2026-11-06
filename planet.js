@@ -3,14 +3,14 @@ const host=document.getElementById('planet');
 const mobile=matchMedia('(max-width: 640px)').matches;
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 let renderer;
-try { renderer=new THREE.WebGLRenderer({alpha:true,antialias:true,preserveDrawingBuffer:true,powerPreference:'low-power'}); }
+try { renderer=new THREE.WebGLRenderer({alpha:true,antialias:true,powerPreference:'low-power'}); }
 catch { host.classList.add('planet-fallback'); }
 if(renderer){
  renderer.setPixelRatio(Math.min(devicePixelRatio,mobile?1.25:1.75));
  renderer.setClearColor(0x000000,0);renderer.outputColorSpace=THREE.SRGBColorSpace;
  renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.2;
  renderer.shadowMap.enabled=!mobile;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
- host.prepend(renderer.domElement);renderer.domElement.setAttribute('aria-hidden','true');
+ (host.querySelector('.planet-surface')||host).prepend(renderer.domElement);renderer.domElement.setAttribute('aria-hidden','true');
  const scene=new THREE.Scene();
  if(!mobile){
  const pmrem=new THREE.PMREMGenerator(renderer);

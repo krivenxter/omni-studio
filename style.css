@@ -506,3 +506,8 @@ ul li::marker{color:var(--blue)}.direction-scale li::marker,.contact li::marker{
 .hero-actions .hero-chat{background:transparent;transition:color .2s,border-color .2s}
 .hero-actions .hero-chat:hover,.hero-actions .hero-chat:focus-visible,.hero-actions .hero-chat:active{background:transparent;color:#1937c7;border-color:#1937c7}
 @media(max-width:640px){.chat-launcher>span:last-child{flex-basis:100px;max-width:100px;padding-inline:6px}}
+
+/* Keep WebGL unmasked; fade a stable composited wrapper instead. */
+.planet-surface{position:absolute;inset:0;transform:translateZ(0);-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 12%,#000 80%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0%,#000 12%,#000 80%,transparent 100%)}
+.hero-art .planet-surface canvas,.hero-art .planet-surface .planet-static,.hero-art .planet-surface .planet-poster{-webkit-mask-image:none;mask-image:none}
+.hero-art .planet-surface canvas{display:block;transform:translateZ(0)}
