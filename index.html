@@ -16,7 +16,16 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://krivenxter.github.io/omni-studio/#organization", "name": "ОМНИ", "legalName": "ООО «ОМНИ»", "url": "https://krivenxter.github.io/omni-studio/", "logo": "https://krivenxter.github.io/omni-studio/assets/omni-logo-v2.svg", "description": "PR и привлечение клиентов. Упаковка франшизы."}, {"@type": "WebSite", "@id": "https://krivenxter.github.io/omni-studio/#website", "url": "https://krivenxter.github.io/omni-studio/", "name": "ОМНИ", "inLanguage": "ru-RU", "publisher": {"@id": "https://krivenxter.github.io/omni-studio/#organization"}}]}</script>
 <link rel="modulepreload" href="./planet.js?v=61"><link rel="modulepreload" href="./vendor/three.module.min.js"><link rel="modulepreload" href="./vendor/three.core.min.js">
 </head>
-<body><div class="hero-ambient" aria-hidden="true"><i></i></div><svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true"><defs><symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+<body><script>
+(()=>{if(!new URLSearchParams(location.search).has('omni-debug'))return;
+const errors=[];let panel;
+const report=()=>{if(!panel)return;const planet=document.getElementById('planet');panel.textContent=['OMNI diagnostic 20261106-b','secure: '+isSecureContext,'motion: '+matchMedia('(prefers-reduced-motion:reduce)').matches,'scripts: '+document.scripts.length+' / parts: '+(window.__omniParts?.length??'assembled'),'app: '+Boolean(window.OMNI_TILDA_STARTED),'formats: '+Boolean(document.querySelector('#strategy-graphic svg'))+' / process: '+Boolean(document.querySelector('#process-scene svg')),'planet: '+(planet?.className??'missing'),'blur: '+(document.querySelector('.header')?getComputedStyle(document.querySelector('.header')).webkitBackdropFilter:'missing'),'errors: '+(errors.join(' | ')||'none'),navigator.userAgent].join('\n');};
+addEventListener('error',e=>{errors.push(e.message||('Resource: '+(e.target?.src||e.target?.href||e.target?.tagName)));report();},true);
+addEventListener('unhandledrejection',e=>{errors.push(String(e.reason?.stack||e.reason));report();});
+const mount=()=>{panel=document.createElement('pre');panel.style.cssText='position:fixed;z-index:2147483647;top:12px;left:8px;right:8px;max-height:48vh;overflow:auto;white-space:pre-wrap;padding:12px;background:#fff;color:#111;border:2px solid #264aef;font:11px/1.4 monospace;user-select:text';document.body.append(panel);report();setInterval(report,1500);};
+if(document.body)mount();else addEventListener('DOMContentLoaded',mount,{once:true});
+})();
+</script><div class="hero-ambient" aria-hidden="true"><i></i></div><svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true"><defs><symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
   <path d="M7 7h10v10" />
   <path d="M7 17 17 7" />
 </symbol><symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">

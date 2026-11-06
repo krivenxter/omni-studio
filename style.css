@@ -486,3 +486,7 @@ ul li::marker{color:var(--blue)}.direction-scale li::marker,.contact li::marker{
 @media(min-width:641px){.hero-actions{margin-top:48px}}
 @media(min-width:641px) and (max-width:1150px){.hero-actions .button-label,.hero .hero-actions .hero-chat{font-size:12px}.hero .hero-actions .button,.hero .hero-actions .hero-chat{gap:8px}}
 @media(max-width:640px){.hero-actions{grid-template-columns:1fr}.hero-actions>.hero-chat{grid-column:1;grid-row:3}.hero-actions .button-label,.hero .hero-actions .hero-chat{font-size:14px;white-space:normal}.hero-consent{font-size:11px}}
+
+/* The bridge glow belongs to the process, behind the following paper section. */
+.franchise{position:relative;z-index:1;isolation:isolate}
+.franchise:before{content:'';position:absolute;inset:0 calc((100% - 100vw)/2);background:var(--paper);z-index:-1;pointer-events:none}
