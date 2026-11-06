@@ -10,7 +10,14 @@ if(renderer){
  renderer.setClearColor(0x000000,0);renderer.outputColorSpace=THREE.SRGBColorSpace;
  renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.2;
  renderer.shadowMap.enabled=!mobile;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
- (host.querySelector('.planet-surface')||host).prepend(renderer.domElement);renderer.domElement.setAttribute('aria-hidden','true');
+ // WKWebView may flash a composited WebGL surface while scrolling. Keep rendering
+ // in WebGL, but present its completed frame through a normal canvas on iOS.
+ const useCanvasPresentation=mobile&&/iP(?:hone|ad|od)/.test(navigator.userAgent)&&!/CriOS\//.test(navigator.userAgent);
+ const presentation=useCanvasPresentation?document.createElement('canvas'):renderer.domElement;
+ const presentationContext=useCanvasPresentation?presentation.getContext('2d'):null;
+ const displayCanvas=presentationContext?presentation:renderer.domElement;
+ displayCanvas.dataset.presentation=presentationContext?'2d':'webgl';
+ (host.querySelector('.planet-surface')||host).prepend(displayCanvas);displayCanvas.setAttribute('aria-hidden','true');
  const scene=new THREE.Scene();
  if(!mobile){
  const pmrem=new THREE.PMREMGenerator(renderer);
@@ -107,7 +114,7 @@ if(renderer){
  });
  let pointerX=0,pointerY=0,scroll=0,targetScroll=0,visible=true,paused=reduced.matches,elapsed=0,last=performance.now(),frame;
  let canvasWidth=0,canvasHeight=0;
- function resize(){const rect=host.getBoundingClientRect();const width=Math.round(rect.width),height=Math.round(rect.height);if(!width||!height||(width===canvasWidth&&height===canvasHeight))return;canvasWidth=width;canvasHeight=height;renderer.setSize(width,height);camera.aspect=width/height;camera.position.z=camera.aspect<1.25?7.8:7.2;camera.updateProjectionMatrix();}
+ function resize(){const rect=host.getBoundingClientRect();const width=Math.round(rect.width),height=Math.round(rect.height);if(!width||!height||(width===canvasWidth&&height===canvasHeight))return;canvasWidth=width;canvasHeight=height;renderer.setSize(width,height);if(presentationContext){displayCanvas.width=renderer.domElement.width;displayCanvas.height=renderer.domElement.height;displayCanvas.style.width=width+'px';displayCanvas.style.height=height+'px';}camera.aspect=width/height;camera.position.z=camera.aspect<1.25?7.8:7.2;camera.updateProjectionMatrix();}
  new ResizeObserver(resize).observe(host);
  document.querySelector('.hero').addEventListener('pointermove',event=>{if(event.pointerType==='touch')return;const box=host.getBoundingClientRect();pointerX=Math.max(-.8,Math.min(.8,(event.clientX-box.left)/box.width-.5));pointerY=Math.max(-.7,Math.min(.7,(event.clientY-box.top)/box.height-.5));});
  document.querySelector('.hero').addEventListener('pointerleave',()=>{pointerX=0;pointerY=0;});
@@ -165,6 +172,7 @@ if(renderer){
     const attribute=partner.connection.geometry.attributes.position;attribute.setXYZ(1,partner.system.position.x,partner.system.position.y,partner.system.position.z);attribute.needsUpdate=true;
    });
    renderer.render(scene,camera);
+   if(presentationContext){presentationContext.clearRect(0,0,displayCanvas.width,displayCanvas.height);presentationContext.drawImage(renderer.domElement,0,0);}
   }
   frame=requestAnimationFrame(render);
  }
