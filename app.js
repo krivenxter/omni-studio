@@ -215,3 +215,14 @@ if(/CriOS\//.test(navigator.userAgent)&&window.visualViewport){
  window.addEventListener('pageshow',syncChromeViewport);
  syncChromeViewport();
 }
+
+// Browser toolbar animations must not resize the first screen mid-scroll.
+let stableViewportWidth=0;
+function setStableHeroViewport(){
+ const width=document.documentElement.clientWidth;
+ if(width===stableViewportWidth)return;
+ stableViewportWidth=width;
+ document.documentElement.style.setProperty('--stable-viewport-height',window.innerHeight+'px');
+}
+setStableHeroViewport();
+window.addEventListener('resize',setStableHeroViewport);
