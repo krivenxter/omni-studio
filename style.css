@@ -491,7 +491,8 @@ ul li::marker{color:var(--blue)}.direction-scale li::marker,.contact li::marker{
 .franchise{position:relative;z-index:1;isolation:isolate}
 .franchise:before{content:'';position:absolute;inset:0 calc((100% - 100vw)/2);background:var(--paper);z-index:-1;pointer-events:none}
 
-/* Continue the header backdrop behind the inset used by iOS in-app toolbars. */
+/* Cover Telegram iOS content painted above the WebView frame. */
+.inapp-top-cover{display:none}
 @media(max-width:640px){
- .header.is-scrolled:before{content:'';display:block;position:absolute;inset:-120px -8px 0;z-index:-1;border-radius:0;background:inherit;backdrop-filter:inherit;-webkit-backdrop-filter:inherit;pointer-events:none}
+ .inapp-top-cover{display:block;position:sticky;top:-200px;height:200px;margin-top:-200px;z-index:60;background:var(--paper);pointer-events:none}
 }
