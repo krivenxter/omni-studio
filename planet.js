@@ -117,7 +117,7 @@ if(renderer){
  control.addEventListener('click',()=>{paused=!paused;control.setAttribute('aria-pressed',String(paused));control.setAttribute('aria-label',paused?'Включить вращение планеты':'Остановить вращение планеты');control.innerHTML='<svg class="icon" viewBox="0 0 24 24"><use href="#i-'+(paused?'play':'pause')+'"/></svg>';});
  reduced.addEventListener('change',()=>{paused=reduced.matches;control.setAttribute('aria-pressed',String(paused));control.innerHTML='<svg class="icon" viewBox="0 0 24 24"><use href="#i-'+(paused?'play':'pause')+'"/></svg>';});
  let lastDraw=-Infinity;
- function render(now){if(mobile&&now-lastDraw<32){frame=requestAnimationFrame(render);return;}lastDraw=now;const delta=Math.min((now-last)/1000,.05);last=now;if(assetsReady&&!paused&&!document.hidden&&visible)elapsed+=delta;
+ function render(now){if(mobile&&!window.OMNI_PLANET_FULL_FPS&&now-lastDraw<32){frame=requestAnimationFrame(render);return;}lastDraw=now;const delta=Math.min((now-last)/1000,.05);last=now;if(assetsReady&&!paused&&!document.hidden&&visible)elapsed+=delta;
   if(visible&&!document.hidden&&assetsReady){
    scroll+=(targetScroll-scroll)*Math.min(1,delta*12);
    const still=reduced.matches;
