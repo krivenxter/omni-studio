@@ -501,3 +501,8 @@ ul li::marker{color:var(--blue)}.direction-scale li::marker,.contact li::marker{
  body:has(.header.menu-is-open) .inapp-top-cover{background:var(--paper)}
  .header.menu-is-open nav{left:0;right:0}
 }
+
+/* Outlined secondary CTA and a tighter mobile chat label. */
+.hero-actions .hero-chat{background:transparent;transition:color .2s,border-color .2s}
+.hero-actions .hero-chat:hover,.hero-actions .hero-chat:focus-visible,.hero-actions .hero-chat:active{background:transparent;color:#1937c7;border-color:#1937c7}
+@media(max-width:640px){.chat-launcher>span:last-child{flex-basis:100px;max-width:100px;padding-inline:6px}}
