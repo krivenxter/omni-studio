@@ -3,7 +3,7 @@ const host=document.getElementById('planet');
 const mobile=matchMedia('(max-width: 640px)').matches;
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 let renderer;
-try { renderer=new THREE.WebGLRenderer({alpha:true,antialias:true,powerPreference:'low-power'}); }
+try { renderer=new THREE.WebGLRenderer({alpha:true,antialias:true,preserveDrawingBuffer:true,powerPreference:'low-power'}); }
 catch { host.classList.add('planet-fallback'); }
 if(renderer){
  renderer.setPixelRatio(Math.min(devicePixelRatio,mobile?1.25:1.75));
@@ -105,13 +105,13 @@ if(renderer){
   const points=[];for(let i=0;i<=160;i++){const a=i/160*Math.PI*2;points.push(new THREE.Vector3(Math.cos(a)*radius,Math.sin(a)*radius*.25,-Math.sin(a)*radius*.968));}
   const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints(points),new THREE.LineBasicMaterial({color:index===1?0x7c95bd:0x476beb,transparent:true,opacity:.34}));audience.add(line);return line;
  });
- let pointerX=0,pointerY=0,scroll=0,visible=true,paused=reduced.matches,elapsed=0,last=performance.now(),frame;
+ let pointerX=0,pointerY=0,scroll=0,targetScroll=0,visible=true,paused=reduced.matches,elapsed=0,last=performance.now(),frame;
  let canvasWidth=0,canvasHeight=0;
  function resize(){const rect=host.getBoundingClientRect();const width=Math.round(rect.width),height=Math.round(rect.height);if(!width||!height||(width===canvasWidth&&height===canvasHeight))return;canvasWidth=width;canvasHeight=height;renderer.setSize(width,height);camera.aspect=width/height;camera.position.z=camera.aspect<1.25?7.8:7.2;camera.updateProjectionMatrix();}
  new ResizeObserver(resize).observe(host);
  document.querySelector('.hero').addEventListener('pointermove',event=>{if(event.pointerType==='touch')return;const box=host.getBoundingClientRect();pointerX=Math.max(-.8,Math.min(.8,(event.clientX-box.left)/box.width-.5));pointerY=Math.max(-.7,Math.min(.7,(event.clientY-box.top)/box.height-.5));});
  document.querySelector('.hero').addEventListener('pointerleave',()=>{pointerX=0;pointerY=0;});
- window.addEventListener('scroll',()=>{scroll=Math.min(window.scrollY/(innerHeight*.65),1);},{passive:true});
+ window.addEventListener('scroll',()=>{targetScroll=Math.max(0,Math.min(window.scrollY/(innerHeight*.65),1));},{passive:true});
  const control=document.querySelector('.planet-pause');
  control.setAttribute('aria-pressed',String(paused));control.innerHTML='<svg class="icon" viewBox="0 0 24 24"><use href="#i-'+(paused?'play':'pause')+'"/></svg>';control.setAttribute('aria-label',paused?'Включить вращение планеты':'Остановить вращение планеты');
  control.addEventListener('click',()=>{paused=!paused;control.setAttribute('aria-pressed',String(paused));control.setAttribute('aria-label',paused?'Включить вращение планеты':'Остановить вращение планеты');control.innerHTML='<svg class="icon" viewBox="0 0 24 24"><use href="#i-'+(paused?'play':'pause')+'"/></svg>';});
@@ -119,6 +119,7 @@ if(renderer){
  let lastDraw=-Infinity;
  function render(now){if(mobile&&now-lastDraw<32){frame=requestAnimationFrame(render);return;}lastDraw=now;const delta=Math.min((now-last)/1000,.05);last=now;if(assetsReady&&!paused&&!document.hidden&&visible)elapsed+=delta;
   if(visible&&!document.hidden&&assetsReady){
+   scroll+=(targetScroll-scroll)*Math.min(1,delta*12);
    const still=reduced.matches;
    // Nine-second story. Scroll changes only the transition scale, never its stage.
    const cycle=elapsed%9;
